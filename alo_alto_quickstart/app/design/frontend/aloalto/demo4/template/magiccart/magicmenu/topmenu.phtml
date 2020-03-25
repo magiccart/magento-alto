@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magiccart 
+ * @category 	Magiccart 
+ * @copyright 	Copyright (c) 2014 Magiccart (http://www.magiccart.net/) 
+ * @license 	http://www.magiccart.net/license-agreement.html
+ * @Author: Magiccart<team.magiccart@gmail.com>
+ * @@Create Date: 2014-04-25 13:15:04
+ * @@Modify Date: 2016-01-06 17:48:56
+ * @@Function:
+ */
+?>
+
+<?php
+
+// drawMainHome
+$menu = $this->cfgExt->topmenu;
+if(!$menu['enabled']) return;
+$drawHomeMenu = '';
+$home = $menu['home'];
+if($home) $drawHomeMenu  = $this->drawHomeMenu();
+
+// drawMainMenu vs DrowMobileMenu
+$menuHtml = $this->drawMainMenu();
+$mobileMenu = $menuHtml['mobile'];
+$desktop = $vdesktop = $menuHtml['desktop'];
+
+
+?>
+<?php
+$vmenu = $this->cfgExt->vmenu;
+if($vmenu['enabled']) :
+	$rootName = Mage::getModel('catalog/category')->load(Mage::app()->getStore()->getRootCategoryId())->getName();
+	$ids  = explode(',', $vmenu['notIncludeNav']);
+	foreach ($ids as $id) {
+		unset($vdesktop[$id]);
+	}
+	$drawMainMenu = $vmenu['mainCat'] ? implode("\n", $vdesktop) : '';
+?>
+<?php
+endif;
+$ids  = explode(',', $menu['notIncludeNav']);
+foreach ($ids as $id) {
+	unset($desktop[$id]);
+}
+$drawMainMenu = $menu['mainCat'] ? implode("\n", $desktop) : '';
+
+// drawExtMenu ExtraMenu
+$drawExtraMenu = $menu['extraCat'] ? $this->drawExtraMenu() : '';
+?>
+<?php $sticker = $menu['sticker'] ? 'sticker' : ''; ?>
+<div class="magicmenu clearfix">
+	<ul class="nav-desktop <?php echo $sticker ?>" data-fullWidth=<?php echo $menu['fullWidth'] ?>>
+		<?php echo $drawHomeMenu ?>
+		<?php echo $drawMainMenu ?>
+		<?php echo $drawExtraMenu ?>
+	</ul>
+</div>
+<div class="nav-mobile">
+	<h3 class="mobi-title"><?php echo $this->__('Categories')?></h3>
+	<ul>
+		<?php echo $mobileMenu ?>
+		<?php echo $drawExtraMenu ?>
+	</ul>
+</div>

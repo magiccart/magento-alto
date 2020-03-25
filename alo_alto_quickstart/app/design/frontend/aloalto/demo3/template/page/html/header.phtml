@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<div class="header-container header-color color">
+    <div class="header_full">
+    	<div class="header">
+    	    <div class="header-content header-sticker">
+    	    	<div class="container">
+				    <div class="row">
+				    	<div class="content-logo col-md-2 col-sm-2 col-xs-12">
+				    		<div class="header-logo">
+								 <?php if ($this->getIsHomePage()):?>
+									<h1 class="logo">
+										<strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo1"><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+									</h1>
+								<?php else:?>
+									<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><strong><?php echo $this->getLogoAlt() ?></strong><img class="img-responsive" src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+								<?php endif?>
+							</div>
+				    	</div>
+				    	<div class="col-lg-12">
+						    <div class="border-bottom menu-mobile">
+							    <div class="menu-mobile-none">
+									<div class="custom-menu">
+										<?php echo $this->getChildHtml('topMenu') ?>
+									</div>
+								</div>
+							</div>
+                        </div>
+                        <div class="position-right">
+	                        <div class="content-seach">
+						    	<div class="header-setting header-search header-setting-seach">
+							    	<div class="settting-switcher">
+							    	    <div class="icon icon-seach">
+							    	       <div class="icon-search"></div>
+							    	    </div>
+							    	    <div class="dropdown-switcher">
+								    		<div class="top-search-alo">
+												<?php echo $this->getChildHtml('topSearch') ?>
+											</div>
+								    	</div>
+		                            </div>
+							    </div>
+	                        </div>
+	                        <div class="content-cart">
+					    		<div class="miniCartWrap">
+									<?php echo $this->getChildHtml('ajaxcart'); ?>
+								</div>
+					    	</div>	
+					    	<div class="header-setting accont-setting">
+								<div class="settting-switcher">
+								    <div class="dropdown-toggle">
+										<div class="icons-config pe-7s-config"></div>
+									</div>
+									<div class="dropdown-switcher">
+										<div class="top-links-alo">
+									    	<div class="header-top-link">
+									    	    <div class="top-form-language">
+									    	        <div class="label-title"><?php echo $this->__('Language:'); ?></div>
+									    	        <?php echo $this->getChildHtml('store_language') ?>
+									    	    </div>
+									    	    <?php $currencyHtml = $this->getChildHtml('currency');?>
+													<?php if($currencyHtml): ?>
+												    	<?php echo $currencyHtml ?>
+												<?php endif ?>
+												<?php echo $this->getChildHtml('topLinks') ?>
+											</div>
+								        </div>
+									</div>
+								</div>
+							</div>
+                        </div>
+				    </div>
+				</div>
+    	    </div>
+    	</div>
+    </div>
+			
+        <?php echo $this->getChildHtml('topContainer'); ?>
+</div>
+
